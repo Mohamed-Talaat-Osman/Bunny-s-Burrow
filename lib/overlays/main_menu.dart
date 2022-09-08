@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:game_assignment/game/game.dart';
 import 'package:game_assignment/overlays/settings.dart';
+import 'package:game_assignment/widgets/backGround.dart';
+import 'package:game_assignment/widgets/card.dart';
+import 'package:game_assignment/widgets/default_button.dart';
+import 'package:game_assignment/widgets/regular_text.dart';
 
 import '../game/game_play.dart';
 
@@ -14,39 +18,41 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.fitWidth,
-          ),
-          color: Colors.black,
-        ),
+      body: BackGroundImage(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 100,
-                child: ElevatedButton(
-                  onPressed: () {
-                    gameRef.overlays.remove(id);
-                    gameRef.add(GamePlay());
-                  },
-                  child: const Text('Play'),
+          child: CustomCard(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DefaultButton(
+                    onTap:  () {
+                      gameRef.overlays.remove(id);
+                      gameRef.add(GamePlay());
+                    },
+                    color: Colors.blueAccent,
+                  child: RegularText(
+                    text: "Play",
+                    size: 14,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 100,
-                child: ElevatedButton(
-                  onPressed: () {
+                const SizedBox(
+                  height: 10,
+                ),
+                DefaultButton(
+                  onTap:  () {
                     gameRef.overlays.remove(id);
                     gameRef.overlays.add(Settings.id);
                   },
-                  child: const Text('Settings'),
+                  color: Colors.blueAccent,
+                  child: RegularText(
+                    text: "Settings",
+                    size: 14,
+                    color: Colors.white,
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

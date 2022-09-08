@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:game_assignment/game/game.dart';
+import 'package:game_assignment/widgets/card.dart';
 import '../game/game_play.dart';
+import '../widgets/default_button.dart';
+import '../widgets/regular_text.dart';
 import 'main_menu.dart';
 
 class GameOver extends StatelessWidget {
@@ -14,34 +17,43 @@ class GameOver extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black.withAlpha(100),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
+        child: CustomCard(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DefaultButton(
+                onTap:  () {
                   gameRef.overlays.remove(id);
                   gameRef.resumeEngine();
                   gameRef.removeAll(gameRef.children);
                   gameRef.add(GamePlay());
                 },
-                child: const Text('Restart'),
+                color: Colors.blueAccent,
+                child: RegularText(
+                  text: "Restart",
+                  size: 14,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
+              const SizedBox(
+                height: 10,
+              ),
+              DefaultButton(
+                onTap:  () {
                   gameRef.overlays.remove(id);
                   gameRef.resumeEngine();
                   gameRef.removeAll(gameRef.children);
                   gameRef.overlays.add(MainMenu.id);
                 },
-                child: const Text('Exit'),
+                color: Colors.blueAccent,
+                child: RegularText(
+                  text: "Exit",
+                  size: 14,
+                  color: Colors.white,
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
